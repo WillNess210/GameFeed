@@ -1,0 +1,32 @@
+#mainbody{
+    display: grid;
+    grid-template-columns: 2fr 4fr 2fr;
+    column-gap: 2rem;
+}
+
+.card{
+    margin-bottom: 10px;
+}
+
+.addform{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 5px;
+}
+.addform button{
+    margin-top: 5px;
+    grid-column-start: 1;
+    grid-column-end: 3;
+}
+
+.win-header{
+    background-color: #FFDF00;
+}
+
+.win-body{
+    background-color: #FFEC64;
+}
+
+.rmvbutton{
+    float:right;
+}
