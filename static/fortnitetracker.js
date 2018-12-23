@@ -4,6 +4,7 @@ $(function(){
     var results = $('#results');
     // CLEARING STUFF
     var clearBtn = $('#clearbtn');
+    var winBtn = $('#winbtn');
     // ADDING STUFF
     var addBtn=$('#addbtn');
     var userSub = $('#userfield');
@@ -13,6 +14,7 @@ $(function(){
     addBtn.click(function(){
         var userToAdd = {};
         userToAdd.username = userSub.val();
+        userSub.val('');
         if(userToAdd.username.length == 0){
             return;
         }
@@ -104,7 +106,9 @@ $(function(){
             success: function(data){
                 data = JSON.parse(data)[0];
                 if(data.id != thisuser.lastmatchid && data.matches == 1){
-                    appendMatch(thisuser, data);
+                    if(winBtn.val() == 0 || (data.top1 && winBtn.val() == 1)){
+                        appendMatch(thisuser, data);
+                    }
                     thisuser.lastmatchid = data.id;
                 }
             }
@@ -173,5 +177,20 @@ $(function(){
     }
     clearBtn.click(function(){
         results.html('');
+    });
+    winBtn.click(function(){
+        if(winBtn.val() == 0){
+            winBtn.val(1);
+            winBtn.css("background-color","#FFEC64");
+            winBtn.css("border-color","#FFEC64");
+            winBtn.css("color","black");
+            winBtn.html("Showing Only Wins");
+        }else{
+            winBtn.val(0);
+            winBtn.css("background-color","#dc3545");
+            winBtn.css("border-color","#dc3545");
+            winBtn.css("color","white");
+            winBtn.html("Showing All Matches");
+        }
     });
 });
